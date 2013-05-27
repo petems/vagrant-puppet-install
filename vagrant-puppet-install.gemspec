@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'vagrant-omnibus/version'
+require 'vagrant-puppet-install/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "vagrant-omnibus"
-  spec.version       = VagrantPlugins::Omnibus::VERSION
-  spec.authors       = ["Seth Chisamore"]
-  spec.email         = ["schisamo@opscode.com"]
-  spec.description   = %q{A Vagrant plugin that ensures the desired version of Chef is installed via the platform-specific Omnibus packages.}
+  spec.name          = "vagrant-puppet-install"
+  spec.version       = VagrantPlugins::PuppetInstall::VERSION
+  spec.authors       = ["Seth Chisamore", "Patrick Connolly"]
+  spec.email         = ["schisamo@opscode.com", "patrick@myplanetdigital.com"]
+  spec.description   = %q{A Vagrant plugin that ensures the desired version of Puppet is installed via the Puppet Labs package repos.}
   spec.summary       = spec.description
-  spec.homepage      = "https://github.com/schisamo/vagrant-omnibus"
+  spec.homepage      = "https://github.com/patcon/vagrant-puppet-install"
   spec.license       = "Apache 2.0"
 
   spec.files         = `git ls-files`.split($/)

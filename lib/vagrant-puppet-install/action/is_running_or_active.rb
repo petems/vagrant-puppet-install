@@ -15,7 +15,7 @@
 #
 
 module VagrantPlugins
-  module Omnibus
+  module PuppetInstall
     module Action
       # @author Seth Chisamore <schisamo@opscode.com>
       #

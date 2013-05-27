@@ -19,24 +19,24 @@ require 'rubygems/dependency_installer'
 require 'vagrant'
 
 module VagrantPlugins
-  module Omnibus
+  module PuppetInstall
     # @author Seth Chisamore <schisamo@opscode.com>
     class Config < Vagrant.plugin("2", :config)
 
       # @return [String]
       #   The version of Chef to install.
-      attr_accessor :chef_version
+      attr_accessor :version
 
       def initialize
-        @chef_version = UNSET_VALUE
+        @version = UNSET_VALUE
       end
 
       def finalize!
-        if @chef_version == UNSET_VALUE
-          @chef_version = nil
-        elsif @chef_version.to_s == 'latest'
+        if @version == UNSET_VALUE
+          @version = nil
+        elsif @version.to_s == 'latest'
           # resolve `latest` to a real version
-          @chef_version = retrieve_latest_chef_version
+          @version = retrieve_latest_puppet_version
         end
       end
 

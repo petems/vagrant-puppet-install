@@ -1,12 +1,12 @@
-# vagrant-omnibus
+# vagrant-puppet-install
 
 [![Gem Version](https://badge.fury.io/rb/vagrant-omnibus.png)](https://badge.fury.io/rb/vagrant-omnibus.png)
 [![Build Status](https://travis-ci.org/schisamo/vagrant-omnibus.png?branch=master)](https://travis-ci.org/schisamo/vagrant-omnibus)
 [![Dependency Status](https://gemnasium.com/schisamo/vagrant-omnibus.png)](https://gemnasium.com/schisamo/vagrant-omnibus)
 [![Code Climate](https://codeclimate.com/github/schisamo/vagrant-omnibus.png)](https://codeclimate.com/github/schisamo/vagrant-omnibus)
 
-A Vagrant plugin that ensures the desired version of Chef is installed via the
-platform-specific Omnibus packages. This proves very useful when using Vagrant
+A Vagrant plugin that ensures the desired version of Puppet is installed via the
+Puppet Labs package repo. This proves very useful when using Vagrant
 with provisioner-less baseboxes OR cloud images.
 
 This plugin has been verified to work with the following
@@ -27,34 +27,34 @@ Ensure you have downloaded and installed Vagrant 1.1.x from the
 Installation is performed in the prescribed manner for Vagrant 1.1 plugins.
 
 ```
-$ vagrant plugin install vagrant-omnibus
+$ vagrant plugin install vagrant-puppet-install
 ```
 
 ## Usage
 
-The Omnibus Vagrant plugin automatically hooks into the Vagrant provisioning
-middleware. You specify the version of the Chef Omnibus package you want
-installed using the `omnibus.chef_version` config key. The version string
-should be a valid Chef release version or `:latest`.
+The Puppet Install Vagrant plugin automatically hooks into the Vagrant provisioning
+middleware. You specify the version of the `puppet-common` package you want
+installed using the `puppet_install.version` config key. The version string
+should be a valid Puppet release (ie. `2.7.11`, `3.0.*`, etc.).
 
-Install the latest version of Chef:
+Install the latest version of Puppet:
 
 ```ruby
 Vagrant.configure("2") do |config|
 
-  config.omnibus.chef_version = :latest
+  config.puppet_install.version = "*"
 
   ...
 
 end
 ```
 
-Install a specific version of Chef:
+Install a specific version of Puppet:
 
 ```ruby
 Vagrant.configure("2") do |config|
 
-  config.omnibus.chef_version = "11.4.0"
+  config.puppet_install.version = "2.7.11"
 
   ...
 

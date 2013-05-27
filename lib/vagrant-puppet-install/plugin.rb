@@ -17,28 +17,28 @@
 begin
   require "vagrant"
 rescue LoadError
-  raise "The Vagrant Omnibus plugin must be run within Vagrant."
+  raise "The vagrant-puppet-install plugin must be run within Vagrant."
 end
 
 # This is a sanity check to make sure no one is attempting to install
 # this into an early Vagrant version.
 if Vagrant::VERSION < "1.1.0"
-  raise "The Vagrant Omnibus plugin is only compatible with Vagrant 1.1+"
+  raise "The vagrant-puppet-install plugin is only compatible with Vagrant 1.1+"
 end
 
 module VagrantPlugins
-  module Omnibus
+  module PuppetInstall
     # @author Seth Chisamore <schisamo@opscode.com>
     class Plugin < Vagrant.plugin("2")
-      name "Omnibus"
+      name "Puppet Install"
       description <<-DESC
-      This plugin ensures the desired version of Chef is installed
-      via the platform-specific Omnibus packages.
+      This plugin ensures the desired version of Puppet is installed
+      via the Puppet Labs package repos.
       DESC
 
       def self.provision(hook)
 
-        hook.after(Vagrant::Action::Builtin::Provision, Action.install_chef)
+        hook.after(Vagrant::Action::Builtin::Provision, Action.install_puppet)
 
         # BEGIN workaround
         #
@@ -47,10 +47,10 @@ module VagrantPlugins
         # fire after anything boot related which wedges in right before the
         # actual real run of the provisioner.
 
-        hook.after(VagrantPlugins::ProviderVirtualBox::Action::Boot, Action.install_chef)
+        hook.after(VagrantPlugins::ProviderVirtualBox::Action::Boot, Action.install_puppet)
 
         if VagrantPlugins.const_defined?("AWS")
-          hook.after(VagrantPlugins::AWS::Action::RunInstance, Action.install_chef)
+          hook.after(VagrantPlugins::AWS::Action::RunInstance, Action.install_puppet)
         end
 
         if VagrantPlugins.const_defined?("Rackspace")
@@ -58,16 +58,16 @@ module VagrantPlugins
           # `VagrantPlugins::Rackspace::Action` so we need to ensure it is
           # loaded before accessing the module in the after hook below.
           require 'vagrant-rackspace/action'
-          hook.after(VagrantPlugins::Rackspace::Action::CreateServer, Action.install_chef)
+          hook.after(VagrantPlugins::Rackspace::Action::CreateServer, Action.install_puppet)
         end
 
         # END workaround
       end
 
-      action_hook(:install_chef, :machine_action_up, &method(:provision))
-      action_hook(:install_chef, :machine_action_provision, &method(:provision))
+      action_hook(:install_puppet, :machine_action_up, &method(:provision))
+      action_hook(:install_puppet, :machine_action_provision, &method(:provision))
 
-      config(:omnibus) do
+      config(:puppet_install) do
         require_relative "config"
         Config
       end

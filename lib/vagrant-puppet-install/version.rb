@@ -14,12 +14,8 @@
 # limitations under the License.
 #
 
-require "pathname"
-require "vagrant-omnibus/plugin"
-
 module VagrantPlugins
-  module Omnibus
-    autoload :Action, 'vagrant-omnibus/action'
-    autoload :Config, 'vagrant-omnibus/config'
+  module PuppetInstall
+    VERSION = "1.0.0"
   end
 end
