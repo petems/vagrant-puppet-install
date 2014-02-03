@@ -63,7 +63,7 @@ else
 fi
 sudo dpkg --install #{APT_PACKAGE_FILE}
 sudo apt-get update --quiet
-sudo apt-get install puppet-common=#{version}*
+sudo apt-get install puppet-common=#{version}* -y
 INSTALL_PUPPET
         end
       end
