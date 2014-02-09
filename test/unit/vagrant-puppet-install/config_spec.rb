@@ -6,45 +6,45 @@
 #
 require_relative '../spec_helper'
 
-describe VagrantPlugins::Omnibus::Config do
+describe VagrantPlugins::PuppetInstall::Config do
   let(:instance){ described_class.new }
 
   subject(:config) do
     instance.tap do |o|
-      o.chef_version = chef_version if defined?(chef_version)
+      o.puppet_version = puppet_version if defined?(puppet_version)
       o.finalize!
     end
   end
 
   describe "defaults" do
-    its(:chef_version){ should be_nil }
+    its(:puppet_version){ should be_nil }
   end
 
-  describe "resolving `:latest` to a real Chef version" do
-    let(:chef_version) { :latest }
-    its(:chef_version){ should be_a(String) }
-    its(:chef_version){ should match(/\d*\.\d*\.\d*/) }
+  describe "resolving `:latest` to a real Puppet version" do
+    let(:puppet_version) { :latest }
+    its(:puppet_version){ should be_a(String) }
+    its(:puppet_version){ should match(/\d*\.\d*\.\d*/) }
   end
 
   describe "#validate" do
     let(:machine) { double('machine') }
-    let(:error_hash_key) { "Omnibus Plugin" }
+    let(:error_hash_key) { "Puppet Install Plugin" }
     let(:result) { subject.validate(machine) }
     let(:errors) { result[error_hash_key] }
 
-    it "returns a Hash with an 'Omnibus Plugin' key" do
+    it "returns a Hash with an 'Puppet Install Plugin' key" do
       result.should be_a(Hash)
       result.should have_key(error_hash_key)
     end
 
-    describe "chef_version validation" do
+    describe "puppet_version validation" do
       {
-        "11.4.0" => {
-          :description => "valid Chef version string",
+        "3.4.0" => {
+          :description => "valid Puppet version string",
           :valid => true
         },
         "10.99.99" => {
-          :description => "invalid Chef version string",
+          :description => "invalid Puppet version string",
           :valid => false
         },
         "FUFUFU" => {
@@ -53,7 +53,7 @@ describe VagrantPlugins::Omnibus::Config do
         }
       }.each_pair do |version_string, opts|
         context "#{opts[:description]}: #{version_string}" do
-          let(:chef_version) { version_string }
+          let(:puppet_version) { version_string }
           if opts[:valid]
             it "passes" do
               errors.should be_empty
@@ -65,7 +65,7 @@ describe VagrantPlugins::Omnibus::Config do
           end
         end
       end
-    end # describe chef_version
+    end # describe puppet_version
   end # describe #validate
 
 end
