@@ -41,7 +41,7 @@ module VagrantPlugins
 
           return unless @machine.communicate.ready? && provision_enabled?(env)
 
-          desired_version = @machine.config.puppet_install.chef_version
+          desired_version = @machine.config.puppet_install.puppet_version
 
            unless desired_version.nil?
             if installed_version == desired_version
@@ -152,24 +152,7 @@ module VagrantPlugins
           # the `#recover` method can access it.
           begin
             if windows_guest?
-              # generate a install.bat file at the `@script_tmp_path` location
-              #
-              # We'll also disable Rubocop for this embedded PowerShell code:
-              #
-              # rubocop:disable LineLength, SpaceAroundBlockBraces
-              #
-              File.open(@script_tmp_path, 'w') do |f|
-                f.puts <<-EOH.gsub(/^\s{18}/, '')
-                  @echo off
-                  set version=%1
-                  set dest=%~dp0chef-client-%version%-1.windows.msi
-                  echo Downloading Chef %version% for Windows...
-                  powershell -command "(New-Object System.Net.WebClient).DownloadFile('#{url}?v=%version%', '%dest%')"
-                  echo Installing Chef %version%
-                  msiexec /q /i %dest%
-                EOH
-              end
-              # rubocop:enable LineLength, SpaceAroundBlockBraces
+              # Not sure how to do this in Windows yet...
             else
               downloader = Vagrant::Util::Downloader.new(
                 url,

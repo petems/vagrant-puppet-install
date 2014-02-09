@@ -6,7 +6,7 @@ require 'vagrant-puppet-install'
 require 'vagrant-rackspace'
 
 Vagrant.configure("2") do |config|
-  config.puppet_install.puppet_version = '11.4.0'
+  config.puppet_install.puppet_version = '3.4.2'
 
   config.vm.box = "dummy"
   config.vm.provider :rackspace do |rackspace|
