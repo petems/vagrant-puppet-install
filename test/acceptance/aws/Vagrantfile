@@ -2,11 +2,11 @@
 # vi: set ft=ruby :
 
 # plugins don't seem to be auto-loaded from the bundle
-require 'vagrant-omnibus'
+require 'vagrant-puppet-install'
 require 'vagrant-aws'
 
 Vagrant.configure("2") do |config|
-  config.omnibus.chef_version = '11.4.0'
+  config.puppet_install.puppet_version = '3.4.2'
 
   config.vm.box = "dummy"
   config.vm.provider :aws do |aws, override|
@@ -22,8 +22,4 @@ Vagrant.configure("2") do |config|
     override.ssh.private_key_path = "~/.ssh/id_rsa"
   end
 
-  config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = File.expand_path("../../../support/cookbooks", __FILE__)
-    chef.add_recipe "chef-inator"
-  end
 end
