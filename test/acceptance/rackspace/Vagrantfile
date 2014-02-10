@@ -6,7 +6,7 @@ require 'vagrant-puppet-install'
 require 'vagrant-rackspace'
 
 Vagrant.configure("2") do |config|
-  config.puppet_install.puppet_version = '11.4.0'
+  config.puppet_install.puppet_version = '3.4.2'
 
   config.vm.box = "dummy"
   config.vm.provider :rackspace do |rackspace|
@@ -18,6 +18,11 @@ Vagrant.configure("2") do |config|
     # TODO - switch this to the `override.ssh.private_key_path` syntax once
     # `vagrant-rackspace` is updated.
     config.ssh.private_key_path = "~/.ssh/id_rsa"
+  end
+
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
+    puppet.manifest_file  = "base.pp"
   end
 
 end

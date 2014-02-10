@@ -1,0 +1,1 @@
+notify {"Puppet Installed: $puppetversion":}

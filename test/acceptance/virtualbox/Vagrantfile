@@ -5,9 +5,30 @@
 require 'vagrant-puppet-install'
 
 Vagrant.configure("2") do |config|
-  config.puppet_install.puppet_version = :latest
 
-  config.vm.box = "canonical-ubuntu-12.04"
-  config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
+  config.vm.define :ubuntu do |ubuntu|
+    ubuntu.puppet_install.puppet_version = :latest
 
+    ubuntu.vm.box = "precise64"
+    ubuntu.vm.box_url = "http://files.vagrantup.com/precise64.box"
+
+    ubuntu.vm.provision :puppet do |puppet|
+      puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
+      puppet.manifest_file  = "base.pp"
+    end
+
+  end
+
+  config.vm.define :centos do |centos|
+    centos.puppet_install.puppet_version = :latest  
+    centos.vm.box = 'centos-64-x64-vbox4210-nocm'
+    centos.vm.box_url = 'http://puppet-vagrant-boxes.puppetlabs.com/centos-64-x64-vbox4210-nocm.box'  
+    
+    config.vm.provision :puppet do |puppet|
+      puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
+      puppet.manifest_file  = "base.pp"
+    end
+
+  end
+  
 end
