@@ -1,0 +1,10 @@
+AllCops:
+  Excludes:
+    - vendor/**
+    - bin/**
+Encoding:
+  Enabled: false
+ClassLength:
+  Enabled: false
+MethodLength:
+  Enabled: false

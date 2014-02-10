@@ -14,8 +14,8 @@ This plugin has been verified to work with the following
 
 * VirtualBox (part of core)
 * AWS (ships in [vagrant-aws](https://github.com/mitchellh/vagrant-aws) plugin)
-* Rackspace (ships in [vagrant-rackspace](https://github.com/mitchellh/vagrant-rackspace)
-  plugin)
+* Rackspace (ships in [vagrant-rackspace](https://github.com/mitchellh/vagrant-rackspace) plugin)
+* DigitalOcean (ships in [vagrant-digital_ocean](https://github.com/smdahlen/vagrant-digitalocean) plugin)
 
 It may work with other Vagrant providers but is not guaranteed to!
 
@@ -68,27 +68,24 @@ end
 The unit tests can be run with:
 
 ```
-rake test:unit
+bundle exec rake
+#or
+bundle exec rake test:unit
 ```
 
 The test are also executed by Travis CI every time code is pushed to GitHub.
 
 ### Acceptance
 
-Currently this repo ships with acceptance tests from `vagrant-omnibus`.
-
-These are currently being refactored. When fixed they will: 
-
-* Provision a Vagrant instance.
-* Attempt to install Puppet 3.4.0 using this plugin.
-* Perform a very basic puppet run to ensure Puppet is in fact installed.
-
 The acceptance tests will be run against the Vagrant providers mentioned above. 
 
 The acceptance tests can be run with:
 
 ```
+# to run them all 
 rake test:acceptance
+# or specify a provider
+rake test:acceptance['virtualbox']
 ```
 
 And as expected, all acceptance tests only uses provisioner-less baseboxes and
@@ -104,7 +101,10 @@ cloud images!
 
 ## Authors
 
-Seth Chisamore (schisamo@opscode.com)
 Patrick Connolly
 Martin Lazarov
 Peter Souter
+
+### Adapted from original code by
+
+Seth Chisamore
