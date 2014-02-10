@@ -1,9 +1,9 @@
 # vagrant-puppet-install
 
-[![Gem Version](https://badge.fury.io/rb/vagrant-omnibus.png)](https://badge.fury.io/rb/vagrant-omnibus.png)
-[![Build Status](https://travis-ci.org/schisamo/vagrant-omnibus.png?branch=master)](https://travis-ci.org/schisamo/vagrant-omnibus)
-[![Dependency Status](https://gemnasium.com/schisamo/vagrant-omnibus.png)](https://gemnasium.com/schisamo/vagrant-omnibus)
-[![Code Climate](https://codeclimate.com/github/schisamo/vagrant-omnibus.png)](https://codeclimate.com/github/schisamo/vagrant-omnibus)
+[![Gem Version](https://badge.fury.io/rb/vagrant-puppet-install.png)](http://badge.fury.io/rb/vagrant-puppet-install)
+[![Build Status](https://travis-ci.org/patcon/vagrant-puppet-install.png?branch=master)](https://travis-ci.org/patcon/vagrant-puppet-install)
+[![Dependency Status](https://gemnasium.com/patcon/vagrant-puppet-install.png)](https://gemnasium.com/patcon/vagrant-puppet-install)
+[![Code Climate](https://codeclimate.com/github/patcon/vagrant-puppet-install.png)](https://codeclimate.com/github/patcon/vagrant-puppet-install)
 
 A Vagrant plugin that ensures the desired version of Puppet is installed via the
 Puppet Labs package repo. This proves very useful when using Vagrant
@@ -75,14 +75,17 @@ The test are also executed by Travis CI every time code is pushed to GitHub.
 
 ### Acceptance
 
-Currently this repo ships with a set of basic acceptance tests that will:
+Currently this repo ships with acceptance tests from `vagrant-omnibus`.
+
+These are currently being refactored. When fixed they will: 
 
 * Provision a Vagrant instance.
-* Attempt to install Chef 11.4.0 using this plugin.
-* Perform a very basic chef-solo run to ensure Chef is in fact installed.
+* Attempt to install Puppet 3.4.0 using this plugin.
+* Perform a very basic puppet run to ensure Puppet is in fact installed.
 
-The acceptance tests are run against the Vagrant providers mentioned above. The
-acceptance tests can be run with:
+The acceptance tests will be run against the Vagrant providers mentioned above. 
+
+The acceptance tests can be run with:
 
 ```
 rake test:acceptance
@@ -102,3 +105,6 @@ cloud images!
 ## Authors
 
 Seth Chisamore (schisamo@opscode.com)
+Patrick Connolly
+Martin Lazarov
+Peter Souter

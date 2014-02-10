@@ -24,39 +24,39 @@ module VagrantPlugins
     class Config < Vagrant.plugin("2", :config)
 
       # @return [String]
-      #   The version of Chef to install.
-      attr_accessor :version
+      #   The version of Puppet to install.
+      attr_accessor :puppet_version
 
       def initialize
-        @version = UNSET_VALUE
+        @puppet_version = UNSET_VALUE
       end
 
       def finalize!
-        if @version == UNSET_VALUE
-          @version = nil
-        elsif @version.to_s == 'latest'
+        if @puppet_version == UNSET_VALUE
+          @puppet_version = nil
+        elsif @puppet_version.to_s == 'latest'
           # resolve `latest` to a real version
-          @version = retrieve_latest_puppet_version
+          @puppet_version = retrieve_latest_puppet_version
         end
       end
 
       def validate(machine)
         errors = []
 
-        unless valid_chef_version?(chef_version)
-          msg = "'#{chef_version}' is not a valid version of Chef."
-          msg << "\n\n A list of valid versions can be found at: http://www.opscode.com/chef/install/"
+        unless valid_puppet_version?(puppet_version)
+          msg = "'#{puppet_version}' is not a valid version of Puppet."
+          msg << "\n\n A list of valid versions can be found at: http://docs.puppetlabs.com/release_notes/"
           errors << msg
         end
 
-        { "Omnibus Plugin" => errors }
+        { "Puppet Install Plugin" => errors }
       end
 
       private
 
-      # Query RubyGems.org's Ruby API and retrive the latest version of Chef.
-      def retrieve_latest_chef_version
-        available_gems = dependency_installer.find_gems_with_sources(chef_gem_dependency)
+      # Query RubyGems.org's Ruby API and retrive the latest version of Puppet.
+      def retrieve_latest_puppet_version
+        available_gems = dependency_installer.find_gems_with_sources(puppet_gem_dependency)
         spec, source = if available_gems.respond_to?(:last)
                           # DependencyInstaller sorts the results such that the last one is
                           # always the one it considers best.
@@ -73,12 +73,12 @@ module VagrantPlugins
         spec && spec.version.to_s
       end
 
-      # Query RubyGems.org's Ruby API to see if the user-provided Chef version
-      # is in fact a real Chef version!
-      def valid_chef_version?(version)
+      # Query RubyGems.org's Ruby API to see if the user-provided Puppet version
+      # is in fact a real Puppet version!
+      def valid_puppet_version?(version)
         is_valid = false
         begin
-          available = dependency_installer.find_gems_with_sources(chef_gem_dependency(version))
+          available = dependency_installer.find_gems_with_sources(puppet_gem_dependency(version))
           is_valid = true unless available.empty?
         rescue
         end
@@ -89,8 +89,8 @@ module VagrantPlugins
         @dependency_installer ||= Gem::DependencyInstaller.new
       end
 
-      def chef_gem_dependency(version=nil)
-        Gem::Dependency.new('chef', version)
+      def puppet_gem_dependency(version=nil)
+        Gem::Dependency.new('puppet', version)
       end
     end
   end
