@@ -26,6 +26,10 @@ if Vagrant::VERSION < "1.1.0"
   raise "The vagrant-puppet-install plugin is only compatible with Vagrant 1.1+"
 end
 
+if Vagrant::VERSION < "1.3.5"
+  raise "The vagrant-puppet-install plugin is only compatible with Vagrant 1.3.5 <= right now.\n See https://github.com/patcon/vagrant-puppet-install/issues/5 for details"
+end
+
 module VagrantPlugins
   module PuppetInstall
     # @author Seth Chisamore <schisamo@opscode.com>
