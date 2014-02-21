@@ -10,7 +10,7 @@ group :development do
 end
 
 group :acceptance do
-  gem 'vagrant-digitalocean', '~> 0.4.0'
+  gem 'vagrant-digitalocean', '~> 0.5.3'
   gem 'vagrant-aws', '~> 0.4.0'
   gem 'vagrant-rackspace', '~> 0.1.4'
 end
