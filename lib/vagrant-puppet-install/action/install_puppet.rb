@@ -42,8 +42,7 @@ module VagrantPlugins
           return unless @machine.communicate.ready? && provision_enabled?(env)
 
           desired_version = @machine.config.puppet_install.puppet_version
-
-           unless desired_version.nil?
+          unless desired_version.nil?
             if installed_version == desired_version
               env[:ui].info I18n.t(
                 'vagrant-puppet_install.action.installed',
@@ -59,8 +58,6 @@ module VagrantPlugins
               recover(env)
             end
           end
-
-          @app.call(env)
         end
 
         private
@@ -69,13 +66,19 @@ module VagrantPlugins
         def find_install_script
           if !ENV['PUPPET_INSTALL_URL'].nil?
             ENV['PUPPET_INSTALL_URL']
+          elsif windows_guest?
+            #
           else
             'https://raw2.github.com/petems/puppet-install-shell/master/install_puppet.sh'
           end
         end
 
         def install_script_name
-          'install.sh'
+          if windows_guest?
+            #
+          else
+            'install.sh'
+          end
         end
 
         def windows_guest?

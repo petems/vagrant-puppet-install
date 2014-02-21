@@ -1,0 +1,8 @@
+en:
+  vagrant-puppet-install:
+    action:
+      installed: "Puppet %{version} package is already installed."
+      installing: "Installing Puppet %{version} package..."
+    download:
+      downloading: "Downloading or copying install.sh..."
+      interrupted: "Install.sh download was interrupted. Exiting."
