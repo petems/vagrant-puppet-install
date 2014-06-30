@@ -31,7 +31,7 @@ module VagrantPlugins
       via the Puppet Labs package repos.
       DESC
 
-      action_hook(:install_pupet, Plugin::ALL_ACTIONS) do |hook|
+      action_hook(:install_puppet, Plugin::ALL_ACTIONS) do |hook|
         require_relative 'action/install_puppet'
         hook.after(Vagrant::Action::Builtin::Provision, Action::InstallPuppet)
 
