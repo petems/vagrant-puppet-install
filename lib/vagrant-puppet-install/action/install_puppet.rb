@@ -118,9 +118,9 @@ module VagrantPlugins
             if windows_guest?
               # Not sure yet...
             else
-              # TODO: Execute with `sh` once install.sh removes it's bash-isms.
-              install_cmd =
-                "bash #{install_script_name} -v #{shell_escaped_version} 2>&1"
+              install_cmd = "sh #{install_script_name}"
+              install_cmd << " -v #{shell_escaped_version}"
+              install_cmd << ' 2>&1'
             end
             comm.sudo(install_cmd) do |type, data|
               if [:stderr, :stdout].include?(type)
