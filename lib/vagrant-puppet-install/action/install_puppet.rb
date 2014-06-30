@@ -62,12 +62,21 @@ module VagrantPlugins
 
         private
 
-        # Determines what flavor of install script should be used
+        def config_install_url
+          @machine.config.puppet_install.install_url
+        end
+
+        def env_install_url
+          ENV['PUPPET_INSTALL_URL']
+        end
+
         def find_install_script
-          if !ENV['PUPPET_INSTALL_URL'].nil?
-            ENV['PUPPET_INSTALL_URL']
-          elsif windows_guest?
-            #
+          config_install_url || env_install_url || default_install_url
+        end
+
+        def default_install_url
+          if windows_guest?
+            # No Windows Version yet
           else
             'https://raw2.github.com/petems/puppet-install-shell/master/install_puppet.sh'
           end
@@ -75,7 +84,7 @@ module VagrantPlugins
 
         def install_script_name
           if windows_guest?
-            #
+            # No Windows Version yet
           else
             'install.sh'
           end

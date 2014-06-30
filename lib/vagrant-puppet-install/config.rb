@@ -25,10 +25,11 @@ module VagrantPlugins
     class Config < Vagrant.plugin('2', :config)
       # @return [String]
       #   The version of Puppet to install.
-      attr_accessor :puppet_version
+      attr_accessor :puppet_version, :install_url
 
       def initialize
         @puppet_version = UNSET_VALUE
+        @install_url = UNSET_VALUE
         @logger = Log4r::Logger.new('vagrantplugins::puppet_install::config')
       end
 
@@ -39,6 +40,7 @@ module VagrantPlugins
           # resolve `latest` to a real version
           @puppet_version = retrieve_latest_puppet_version
         end
+        @install_url = nil if @install_url == UNSET_VALUE
       end
 
       def validate(machine)
