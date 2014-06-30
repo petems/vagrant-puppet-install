@@ -34,7 +34,7 @@ $ vagrant plugin install vagrant-puppet-install
 
 The Puppet Install Vagrant plugin automatically hooks into the Vagrant provisioning
 middleware. You specify the version of the `puppet-common` package you want
-installed using the `puppet_install.version` config key. The version string
+installed using the `puppet_install.puppet_version` config key. The version string
 should be a valid Puppet release (ie. `2.7.11`, `3.0.*`, etc.).
 
 Install the latest version of Puppet:
@@ -42,7 +42,7 @@ Install the latest version of Puppet:
 ```ruby
 Vagrant.configure("2") do |config|
 
-  config.puppet_install.version = "*"
+  config.puppet_install.puppet_version = "*"
 
   ...
 
@@ -54,7 +54,7 @@ Install a specific version of Puppet:
 ```ruby
 Vagrant.configure("2") do |config|
 
-  config.puppet_install.version = "2.7.11"
+  config.puppet_install.puppet_version = "2.7.11"
 
   ...
 
@@ -77,12 +77,12 @@ The test are also executed by Travis CI every time code is pushed to GitHub.
 
 ### Acceptance
 
-The acceptance tests will be run against the Vagrant providers mentioned above. 
+The acceptance tests will be run against the Vagrant providers mentioned above.
 
 The acceptance tests can be run with:
 
 ```
-# to run them all 
+# to run them all
 rake test:acceptance
 # or specify a provider
 rake test:acceptance['virtualbox']
