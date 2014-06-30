@@ -1,5 +1,5 @@
 en:
-  vagrant-puppet-install:
+  vagrant-puppet_install:
     action:
       installed: "Puppet %{version} package is already installed."
       installing: "Installing Puppet %{version} package..."
