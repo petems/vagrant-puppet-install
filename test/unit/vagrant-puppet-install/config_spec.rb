@@ -1,6 +1,8 @@
 require_relative '../spec_helper'
 
 describe VagrantPlugins::PuppetInstall::Config do
+  let(:machine) { double('machine') }
+  let(:instance) { described_class.new }
 
   subject(:config) do
     instance.tap do |o|
@@ -21,50 +23,50 @@ describe VagrantPlugins::PuppetInstall::Config do
     its(:puppet_version) { should match(/\d*\.\d*\.\d*/) }
   end
 
-  describe "#validate" do
-    let(:machine) { double('machine') }
-    let(:error_hash_key) { "Puppet Install Plugin" }
-    let(:result) { subject.validate(machine) }
-    let(:errors) { result[error_hash_key] }
-  describe 'setting a custom `install_url`' do
-    let(:install_url) { 'http://some_path.com/install.sh' }
-    its(:install_url) { should eq('http://some_path.com/install.sh') }
+    describe 'validate' do
+    it 'should be no-op' do
+      expect(subject.validate(machine)).to eq('VagrantPlugins::PuppetInstall::Config' => [])
+    end
   end
 
-    it "returns a Hash with an 'Puppet Install Plugin' key" do
-      result.should be_a(Hash)
-      result.should have_key(error_hash_key)
-    end
-
-    describe "puppet_version validation" do
+  describe '#validate!' do
+    describe 'puppet_version validation' do
       {
-        "3.4.0" => {
-          :description => "valid Puppet version string",
-          :valid => true
+        '3.4.0' => {
+          description: 'valid puppet version string',
+          valid: true
         },
-        "10.99.99" => {
-          :description => "invalid Puppet version string",
-          :valid => false
+        '9.9.9' => {
+          description: 'invalid puppet version string',
+          valid: false
         },
-        "FUFUFU" => {
-          :description => "invalid RubyGems version string",
-          :valid => false
+        'FUFUFU' => {
+          description: 'invalid RubyGems version string',
+          valid: false
         }
       }.each_pair do |version_string, opts|
         context "#{opts[:description]}: #{version_string}" do
           let(:puppet_version) { version_string }
           if opts[:valid]
-            it "passes" do
-              errors.should be_empty
+            it 'passes' do
+              expect { subject.validate!(machine) }.to_not raise_error
             end
           else
-            it "fails" do
-              errors.should_not be_empty
+            it 'fails' do
+              expect { subject.validate!(machine) }.to raise_error(Vagrant::Errors::ConfigInvalid)
             end
           end
         end
       end
     end # describe puppet_version
-  end # describe #validate
+
+    describe 'not specified puppet_version validation' do
+      it 'passes' do
+        Gem::DependencyInstaller.any_instance.stub(:find_gems_with_sources).and_return([])
+        expect { subject.validate!(machine) }.to_not raise_error
+      end
+    end # describe not specified puppet_version validation
+
+  end
 
 end

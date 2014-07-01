@@ -22,9 +22,6 @@ require 'vagrant/util/downloader'
 module VagrantPlugins
   module PuppetInstall
     module Action
-      # @author Seth Chisamore <schisamo@opscode.com>
-      #
-      # This action installs Puppet packages at the desired version.
       class InstallPuppet
 
         def initialize(app, env)
@@ -40,6 +37,9 @@ module VagrantPlugins
           @app.call(env)
 
           return unless @machine.communicate.ready? && provision_enabled?(env)
+
+          # Perform delayed validation
+          @machine.config.puppet.validate!(@machine)
 
           desired_version = @machine.config.puppet_install.puppet_version
           unless desired_version.nil?
