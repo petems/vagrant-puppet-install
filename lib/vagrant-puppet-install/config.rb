@@ -3,16 +3,13 @@ require 'rubygems/dependency_installer'
 require 'vagrant'
 
 module VagrantPlugins
-  #
   module PuppetInstall
-    # @author Seth Chisamore <schisamo@opscode.com>
     class Config < Vagrant.plugin('2', :config)
-      # @return [String]
-      #   The version of Puppet to install.
-      attr_accessor :puppet_version
+      attr_accessor :puppet_version, :install_url
 
       def initialize
         @puppet_version = UNSET_VALUE
+        @install_url = UNSET_VALUE
         @logger = Log4r::Logger.new('vagrantplugins::puppet_install::config')
       end
 
@@ -23,12 +20,14 @@ module VagrantPlugins
           # resolve `latest` to a real version
           @puppet_version = retrieve_latest_puppet_version
         end
+        @install_url = nil if @install_url == UNSET_VALUE
       end
 
-      def validate(machine)
+      def validate!(machine)
+        finalize!
         errors = []
 
-        unless valid_puppet_version?(puppet_version)
+        if !puppet_version.nil? && !valid_puppet_version?(puppet_version)
           msg = <<-EOH
 '#{ puppet_version }' is not a valid version of Puppet.
 
@@ -37,7 +36,13 @@ A list of valid versions can be found at: http://docs.puppetlabs.com/release_not
           errors << msg
         end
 
-        { 'Puppet Install Plugin' => errors }
+        if errors.any?
+          rendered_errors = Vagrant::Util::TemplateRenderer.render(
+                              'config/validation_failed',
+                              errors: { 'vagrant-puppet-install' => errors }
+                            )
+          fail Vagrant::Errors::ConfigInvalid, errors: rendered_errors
+        end
       end
 
       private

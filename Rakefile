@@ -43,7 +43,7 @@ namespace :test do
 
       Dir.chdir("test/acceptance/#{provider}") do
         system("vagrant destroy -f")
-        system("vagrant up --provider=#{provider}")
+        system("vagrant up --provider=#{provider} --provision")
         system("vagrant destroy -f")
       end
     end

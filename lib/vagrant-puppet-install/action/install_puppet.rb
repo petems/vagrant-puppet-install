@@ -6,9 +6,6 @@ require 'vagrant/util/downloader'
 module VagrantPlugins
   module PuppetInstall
     module Action
-      # @author Seth Chisamore <schisamo@opscode.com>
-      #
-      # This action installs Puppet packages at the desired version.
       class InstallPuppet
 
         def initialize(app, env)
@@ -24,6 +21,9 @@ module VagrantPlugins
           @app.call(env)
 
           return unless @machine.communicate.ready? && provision_enabled?(env)
+
+          # Perform delayed validation
+          @machine.config.puppet.validate!(@machine)
 
           desired_version = @machine.config.puppet_install.puppet_version
           unless desired_version.nil?
@@ -46,12 +46,21 @@ module VagrantPlugins
 
         private
 
-        # Determines what flavor of install script should be used
+        def config_install_url
+          @machine.config.puppet_install.install_url
+        end
+
+        def env_install_url
+          ENV['PUPPET_INSTALL_URL']
+        end
+
         def find_install_script
-          if !ENV['PUPPET_INSTALL_URL'].nil?
-            ENV['PUPPET_INSTALL_URL']
-          elsif windows_guest?
-            #
+          config_install_url || env_install_url || default_install_url
+        end
+
+        def default_install_url
+          if windows_guest?
+            # No Windows Version yet
           else
             'https://raw2.github.com/petems/puppet-install-shell/master/install_puppet.sh'
           end
@@ -59,7 +68,7 @@ module VagrantPlugins
 
         def install_script_name
           if windows_guest?
-            #
+            # No Windows Version yet
           else
             'install.sh'
           end
@@ -102,9 +111,9 @@ module VagrantPlugins
             if windows_guest?
               # Not sure yet...
             else
-              # TODO: Execute with `sh` once install.sh removes it's bash-isms.
-              install_cmd =
-                "bash #{install_script_name} -v #{shell_escaped_version} 2>&1"
+              install_cmd = "sh #{install_script_name}"
+              install_cmd << " -v #{shell_escaped_version}"
+              install_cmd << ' 2>&1'
             end
             comm.sudo(install_cmd) do |type, data|
               if [:stderr, :stdout].include?(type)
