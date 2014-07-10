@@ -42,7 +42,7 @@ Install the latest version of Puppet:
 ```ruby
 Vagrant.configure("2") do |config|
 
-  config.puppet_install.puppet_version = "*"
+  config.puppet_install.puppet_version = :latest
 
   ...
 
