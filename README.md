@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/vagrant-puppet-install.png)](http://badge.fury.io/rb/vagrant-puppet-install)
 [![Build Status](https://travis-ci.org/petems/vagrant-puppet-install.png?branch=master)](https://travis-ci.org/petems/vagrant-puppet-install)
 [![Dependency Status](https://gemnasium.com/petems/vagrant-puppet-install.png)](https://gemnasium.com/petems/vagrant-puppet-install)
-[![Code Climate](https://codeclimate.com/github/petems/vagrant-puppet-install.png)](https://codeclimate.com/petems/patcon/vagrant-puppet-install)
+[![Code Climate](https://codeclimate.com/github/petems/vagrant-puppet-install.png)](https://codeclimate.com/petems/vagrant-puppet-install)
 
 A Vagrant plugin that ensures the desired version of Puppet is installed via the
 Puppet Labs package repo. This proves very useful when using Vagrant
