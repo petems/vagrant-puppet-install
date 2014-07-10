@@ -58,6 +58,26 @@ module VagrantPlugins
           config_install_url || env_install_url || default_install_url
         end
 
+        def cached_omnibus_download_dir
+          '/tmp/vagrant-cache/vagrant_puppet_install'
+        end
+
+        def cache_packages?
+          @machine.config.omnibus.cache_packages
+        end
+
+        def cachier_present?
+          defined?(VagrantPlugins::Cachier::Plugin)
+        end
+
+        def cachier_autodetect_enabled?
+          @machine.config.cache.auto_detect
+        end
+
+        def download_to_cached_dir?
+          cache_packages? && cachier_present? && cachier_autodetect_enabled?
+        end
+
         def default_install_url
           if windows_guest?
             # No Windows Version yet
@@ -113,6 +133,9 @@ module VagrantPlugins
             else
               install_cmd = "sh #{install_script_name}"
               install_cmd << " -v #{shell_escaped_version}"
+              if download_to_cached_dir?
+                install_cmd << " -d #{cached_omnibus_download_dir}"
+              end
               install_cmd << ' 2>&1'
             end
             comm.sudo(install_cmd) do |type, data|
