@@ -35,4 +35,19 @@ Vagrant.configure("2") do |config|
 
   end
 
+  config.vm.define :new_install_url do |new_install_url|
+    new_install_url.puppet_install.puppet_version = :latest
+    config.puppet_install.install_url = 'https://raw.githubusercontent.com/hashicorp/puppet-bootstrap/master/centos_6_x.sh'
+    new_install_url.vm.box = 'centos-64-x64-vbox4210-nocm'
+    new_install_url.vm.box_url = 'http://puppet-vagrant-boxes.puppetlabs.com/centos-64-x64-vbox4210-nocm.box'
+
+    config.vm.provision :puppet do |puppet|
+      puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
+      puppet.manifest_file  = "base.pp"
+    end
+
+    new_install_url.vm.provision "shell", inline: "puppet --version"
+
+  end
+
 end
