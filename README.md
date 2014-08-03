@@ -61,6 +61,20 @@ Vagrant.configure("2") do |config|
 end
 ```
 
+Specify a custom install script:
+
+```ruby
+Vagrant.configure("2") do |config|
+
+  config.puppet_install.install_url = 'http://acme.com/install.sh'
+  # config.puppet_install.install_url = 'http://acme.com/install.msi'
+  # config.puppet_install.install_url = '/some/path/on/the/host'
+
+  ...
+
+end
+```
+
 ## Tests
 
 ### Unit
