@@ -23,7 +23,7 @@ module VagrantPlugins
           return unless @machine.communicate.ready? && provision_enabled?(env)
 
           # Perform delayed validation
-          @machine.config.puppet.validate!(@machine)
+          @machine.config.puppet_install.validate!(@machine)
 
           desired_version = @machine.config.puppet_install.puppet_version
           unless desired_version.nil?
