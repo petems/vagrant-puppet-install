@@ -1,9 +1,15 @@
 # vagrant-puppet-install
 
-[![Gem Version](https://badge.fury.io/rb/vagrant-puppet-install.png)](http://badge.fury.io/rb/vagrant-puppet-install)
-[![Build Status](https://travis-ci.org/petems/vagrant-puppet-install.png?branch=master)](https://travis-ci.org/petems/vagrant-puppet-install)
-[![Dependency Status](https://gemnasium.com/petems/vagrant-puppet-install.png)](https://gemnasium.com/petems/vagrant-puppet-install)
-[![Code Climate](https://codeclimate.com/github/petems/vagrant-puppet-install.png)](https://codeclimate.com/github/petems/vagrant-puppet-install)
+[![Gem Version](http://img.shields.io/gem/v/vagrant-puppet-install.svg)][gem]
+[![Build Status](http://img.shields.io/travis/petems/vagrant-puppet-install.svg)][travis]
+[![Dependency Status](http://img.shields.io/gemnasium/petems/vagrant-puppet-install.svg)][gemnasium]
+[![Code Climate](http://img.shields.io/codeclimate/github/petems/vagrant-puppet-install.svg)][codeclimate]
+
+[gem]: https://rubygems.org/gems/vagrant-puppet-install
+[travis]: http://travis-ci.org/petems/vagrant-puppet-install
+[gemnasium]: https://gemnasium.com/petems/vagrant-puppet-install
+[codeclimate]: https://codeclimate.com/github/petems/vagrant-puppet-install
+
 
 A Vagrant plugin that ensures the desired version of Puppet is installed via the
 Puppet Labs package repo. This proves very useful when using Vagrant
