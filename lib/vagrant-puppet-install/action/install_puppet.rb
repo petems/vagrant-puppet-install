@@ -62,7 +62,7 @@ module VagrantPlugins
           if windows_guest?
             # No Windows Version yet
           else
-            'https://raw2.github.com/petems/puppet-install-shell/master/install_puppet.sh'
+            'https://raw.githubusercontent.com/petems/puppet-install-shell/master/install_puppet.sh'
           end
         end
 
