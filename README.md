@@ -41,7 +41,9 @@ $ vagrant plugin install vagrant-puppet-install
 The Puppet Install Vagrant plugin automatically hooks into the Vagrant provisioning
 middleware. You specify the version of the `puppet-common` package you want
 installed using the `puppet_install.puppet_version` config key. The version string
-should be a valid Puppet release (ie. `2.7.11`, `3.0.*`, etc.).
+should be a valid Puppet release (ie. `2.7.11`, `3.7.4`, etc.).
+
+The Puppet version is validated against the RubyGems API, so you can use gem syntax to give a [pessimistic version constraint](http://guides.rubygems.org/patterns/#pessimistic-version-constraint) such as `~> 2.7` which will return the latest version of the 2.7.*.
 
 Install the latest version of Puppet:
 

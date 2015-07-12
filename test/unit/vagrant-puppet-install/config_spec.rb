@@ -36,6 +36,10 @@ describe VagrantPlugins::PuppetInstall::Config do
           description: 'valid puppet version string',
           valid: true
         },
+        '~> 2.7' => {
+          description: 'valid puppet version string',
+          valid: true
+        },
         '9.9.9' => {
           description: 'invalid puppet version string',
           valid: false
