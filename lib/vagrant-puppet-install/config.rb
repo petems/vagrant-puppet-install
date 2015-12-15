@@ -16,9 +16,9 @@ module VagrantPlugins
       def finalize!
         if @puppet_version == UNSET_VALUE
           @puppet_version = nil
-	elsif @puppet_version.to_s == 'latest'
-	  # resolve `latest` to a real version
-	  @puppet_version = retrieve_latest_puppet_version
+        elsif @puppet_version.to_s == 'latest'
+          # resolve `latest` to a real version
+          @puppet_version = retrieve_latest_puppet_version
         elsif valid_puppet_version?(puppet_version)
           # allows for pessimistic version constraint
           @puppet_version = retrieve_latest_puppet_version(puppet_version)
