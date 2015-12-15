@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
   config.vm.define :ubuntu do |ubuntu|
     ubuntu.puppet_install.puppet_version = '3.6.1'
 
-    ubuntu.vm.box = "chef/ubuntu-12.04"
+    ubuntu.vm.box = "puppetlabs/ubuntu-12.04-64-nocm"
 
     ubuntu.vm.provision :puppet do |puppet|
       puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
   config.vm.define :gh6 do |gh6|
     gh6.puppet_install.puppet_version = '2.7.23'
 
-    gh6.vm.box = "chef/ubuntu-12.04-i386"
+    gh6.vm.box = "puppetlabs/ubuntu-12.04-64-nocm"
     gh6.vm.provision "shell", inline: "puppet --version"
 
     gh6.vm.provision :puppet do |puppet|
@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define :centos do |centos|
     centos.puppet_install.puppet_version = :latest
-    centos.vm.box = "chef/centos-6.5"
+    centos.vm.box = "puppetlabs/centos-6.6-64-nocm"
 
     centos.vm.provision :puppet do |puppet|
       puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
   config.vm.define :new_install_url do |new_install_url|
     new_install_url.puppet_install.puppet_version = :latest
     new_install_url.puppet_install.install_url = 'https://raw.githubusercontent.com/hashicorp/puppet-bootstrap/master/centos_6_x.sh'
-    new_install_url.vm.box = "chef/centos-6.5"
+    new_install_url.vm.box = "puppetlabs/centos-6.6-64-nocm"
 
     new_install_url.vm.provision :puppet do |puppet|
       puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
@@ -65,7 +65,7 @@ Vagrant.configure("2") do |config|
   config.vm.define :new_install_path do |new_install_path|
     new_install_path.puppet_install.puppet_version = :latest
     new_install_path.puppet_install.install_url = File.expand_path('../../support/puppet_install_script/shell_install.sh')
-    new_install_path.vm.box = "chef/centos-6.5"
+    new_install_path.vm.box = "puppetlabs/centos-6.6-64-nocm"
 
     new_install_path.vm.provision :puppet do |puppet|
       puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
