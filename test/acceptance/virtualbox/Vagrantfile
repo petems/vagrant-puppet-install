@@ -6,6 +6,21 @@ require 'vagrant-puppet-install'
 
 Vagrant.configure("2") do |config|
 
+  config.vm.define :trusty_ubuntu_box do |trusty_ubuntu_box|
+    trusty_ubuntu_box.puppet_install.puppet_version = :latest
+    trusty_ubuntu_box.puppet_install.install_url = 'https://gist.githubusercontent.com/petems/6723c2eedb9d32d7ad97/raw/990ff448f6430aa015e208668a3cecb3f1db0d4b/purge_old_install_new.sh'
+
+    trusty_ubuntu_box.vm.box = "ubuntu/trusty64"
+
+    trusty_ubuntu_box.vm.provision :puppet do |puppet|
+      puppet.environment_path = File.expand_path('../../../support/environments', __FILE__)
+      puppet.environment = "vagrant"
+    end
+
+    trusty_ubuntu_box.vm.provision "shell", inline: "puppet --version"
+
+  end
+
   config.vm.define :ubuntu do |ubuntu|
     ubuntu.puppet_install.puppet_version = '3.6.1'
 
