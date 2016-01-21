@@ -59,7 +59,9 @@ module VagrantPlugins
         end
 
         def default_install_url
-          if windows_guest?
+          if @machine.config.puppet_install.puppet_version.nil?
+            nil
+          elsif windows_guest?
             # No Windows Version yet
           else
             if ( @machine.config.puppet_install.puppet_version == 'latest' || @machine.config.puppet_install.puppet_version.match(/^4\..+/) )
