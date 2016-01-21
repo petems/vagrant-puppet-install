@@ -1,8 +1,8 @@
 # Change Log
 
-## [Unreleased](https://github.com/petems/vagrant-puppet-install/tree/HEAD)
+## [v3.1.0](https://github.com/petems/vagrant-puppet-install/tree/v3.1.0) (2016-01-21)
 
-[Full Changelog](https://github.com/petems/vagrant-puppet-install/compare/v3.0.0...HEAD)
+[Full Changelog](https://github.com/petems/vagrant-puppet-install/compare/v3.0.0...v3.1.0)
 
 **Closed issues:**
 
