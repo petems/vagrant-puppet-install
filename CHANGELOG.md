@@ -1,5 +1,19 @@
 # Change Log
 
+## [v4.0.0](https://github.com/petems/vagrant-puppet-install/tree/v4.0.0) (2016-01-25)
+
+[Full Changelog](https://github.com/petems/vagrant-puppet-install/compare/v3.1.0...v4.0.0)
+
+**Closed issues:**
+
+- Empty puppet\_version gives error. [\#38](https://github.com/petems/vagrant-puppet-install/issues/38)
+
+**Merged pull requests:**
+
+- Removes pessimistic reference from docs [\#40](https://github.com/petems/vagrant-puppet-install/pull/40) ([petems](https://github.com/petems))
+
+- Fix nil errors [\#39](https://github.com/petems/vagrant-puppet-install/pull/39) ([petems](https://github.com/petems))
+
 ## [v3.1.0](https://github.com/petems/vagrant-puppet-install/tree/v3.1.0) (2016-01-21)
 
 [Full Changelog](https://github.com/petems/vagrant-puppet-install/compare/v3.0.0...v3.1.0)
