@@ -6,6 +6,11 @@ require 'vagrant-puppet-install'
 
 Vagrant.configure("2") do |config|
 
+  config.vm.define :no_config_set do |no_config_set|
+    no_config_set.vm.box = "ubuntu/trusty64"
+    no_config_set.vm.provision "shell", inline: "echo 'Should still work with no puppet plugin enabled'"
+  end
+
   config.vm.define :trusty_ubuntu_box do |trusty_ubuntu_box|
     trusty_ubuntu_box.puppet_install.puppet_version = :latest
     trusty_ubuntu_box.puppet_install.install_url = 'https://gist.githubusercontent.com/petems/6723c2eedb9d32d7ad97/raw/990ff448f6430aa015e208668a3cecb3f1db0d4b/purge_old_install_new.sh'
