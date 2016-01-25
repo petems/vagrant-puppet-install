@@ -19,9 +19,6 @@ module VagrantPlugins
         elsif @puppet_version.to_s == 'latest'
           # resolve `latest` to a real version
           @puppet_version = retrieve_latest_puppet_version
-        elsif valid_puppet_version?(puppet_version)
-          # allows for pessimistic version constraint
-          @puppet_version = retrieve_latest_puppet_version(puppet_version)
         end
         @install_url = nil if @install_url == UNSET_VALUE
       end
@@ -51,9 +48,9 @@ A list of valid versions can be found at: http://docs.puppetlabs.com/release_not
       private
 
       # Query RubyGems.org's Ruby API and retrive the latest version of Puppet.
-      def retrieve_latest_puppet_version(version = nil)
+      def retrieve_latest_puppet_version
         available_gems =
-          dependency_installer.find_gems_with_sources(puppet_gem_dependency(version))
+          dependency_installer.find_gems_with_sources(puppet_gem_dependency)
         spec, _source =
         if available_gems.respond_to?(:last)
           # DependencyInstaller sorts the results such that the last one is
