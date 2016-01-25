@@ -43,7 +43,7 @@ middleware. You specify the version of the `puppet-common` package you want
 installed using the `puppet_install.puppet_version` config key. The version string
 should be a valid Puppet release (ie. `2.7.11`, `3.7.4`, etc.).
 
-The Puppet version is validated against the RubyGems API, so you can use gem syntax to give a [pessimistic version constraint](http://guides.rubygems.org/patterns/#pessimistic-version-constraint) such as `~> 2.7` which will return the latest version of the 2.7.*.
+The Puppet version is validated against the RubyGems API. So as long as the version you give is [listed there](https://rubygems.org/gems/puppet/versions/), it will allow you to install.
 
 Install the latest version of Puppet:
 
