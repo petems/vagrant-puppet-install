@@ -36,6 +36,30 @@ Vagrant.configure('2') do |config|
     trusty_361.vm.provision 'shell', inline: 'puppet --version'
   end
 
+  config.vm.define :fedora_23 do |fedora_23|
+    fedora_23.vm.box = "fedora/23-cloud-base"
+    fedora_23.puppet_install.puppet_version = :latest
+
+    fedora_23.vm.provision :puppet do |puppet|
+      puppet.environment_path = File.expand_path('../../../support/environments', __FILE__)
+      puppet.environment = "vagrant"
+    end
+
+    fedora_23.vm.provision 'shell', inline: 'puppet --version'
+  end
+
+  config.vm.define :fedora_384 do |fedora_384|
+    fedora_384.vm.box = "fedora/23-cloud-base"
+    fedora_384.puppet_install.puppet_version = '3.8.4'
+
+    fedora_384.vm.provision :puppet do |puppet|
+      puppet.environment_path = File.expand_path('../../../support/environments', __FILE__)
+      puppet.environment = "vagrant"
+    end
+
+    fedora_384.vm.provision 'shell', inline: 'puppet --version'
+  end
+
   config.vm.define :trusty_ubuntu_box do |trusty_ubuntu_box|
     trusty_ubuntu_box.puppet_install.puppet_version = :latest
     trusty_ubuntu_box.puppet_install.install_url = 'https://gist.githubusercontent.com/petems/6723c2eedb9d32d7ad97/raw/990ff448f6430aa015e208668a3cecb3f1db0d4b/purge_old_install_new.sh'
