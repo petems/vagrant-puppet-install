@@ -18,6 +18,6 @@ Vagrant.configure('2') do |config|
 
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
-    puppet.manifest_file  = "base.pp"
+    puppet.manifest_file  = 'base.pp'
   end
 end

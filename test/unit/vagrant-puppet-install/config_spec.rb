@@ -23,7 +23,7 @@ describe VagrantPlugins::PuppetInstall::Config do
     its(:puppet_version) { should match(/\d*\.\d*\.\d*/) }
   end
 
-    describe 'validate' do
+  describe 'validate' do
     it 'should be no-op' do
       expect(subject.validate(machine)).to eq('VagrantPlugins::PuppetInstall::Config' => [])
     end
@@ -70,7 +70,5 @@ describe VagrantPlugins::PuppetInstall::Config do
         expect { subject.validate!(machine) }.to_not raise_error
       end
     end # describe not specified puppet_version validation
-
   end
-
 end

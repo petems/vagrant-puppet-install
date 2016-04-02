@@ -7,7 +7,6 @@ module VagrantPlugins
   module PuppetInstall
     module Action
       class InstallPuppet
-
         def initialize(app, env)
           @app = app
           @logger =
@@ -64,7 +63,7 @@ module VagrantPlugins
           elsif windows_guest?
             # No Windows Version yet
           else
-            if ( @machine.config.puppet_install.puppet_version == 'latest' || @machine.config.puppet_install.puppet_version.match(/^4\..+/) )
+            if @machine.config.puppet_install.puppet_version == 'latest' || @machine.config.puppet_install.puppet_version.match(/^4\..+/)
               'https://raw.githubusercontent.com/petems/puppet-install-shell/master/install_puppet_agent.sh'
             else
               'https://raw.githubusercontent.com/petems/puppet-install-shell/master/install_puppet.sh'
@@ -136,7 +135,7 @@ module VagrantPlugins
         #
         def fetch_or_create_install_script(env)
           @script_tmp_path =
-            env[:tmp_path].join("#{Time.now.to_i.to_s}-#{install_script_name}")
+            env[:tmp_path].join("#{Time.now.to_i}-#{install_script_name}")
 
           @logger.info("Generating install script at: #{@script_tmp_path}")
 
@@ -171,7 +170,7 @@ module VagrantPlugins
           end
         end
 
-        def recover(env)
+        def recover(_env)
           if @script_tmp_path && File.exist?(@script_tmp_path)
             File.unlink(@script_tmp_path)
           end

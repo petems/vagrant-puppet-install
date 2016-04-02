@@ -5,26 +5,25 @@
 require 'vagrant-puppet-install'
 require 'vagrant-aws'
 
-Vagrant.configure("2") do |config|
+Vagrant.configure('2') do |config|
   config.puppet_install.puppet_version = '3.4.2'
 
-  config.vm.box = "dummy"
+  config.vm.box = 'dummy'
   config.vm.provider :aws do |aws, override|
     aws.access_key_id = ENV['DEV_AWS_ACCESS_KEY_ID']
     aws.secret_access_key = ENV['DEV_AWS_SECRET_ACCESS_KEY']
     aws.keypair_name = ENV['USER']
 
-    aws.instance_type = "m1.large"
-    aws.ami = "ami-2efa9d47" # Ubuntu 12.04 LTS 64-bit instance root store
-    aws.ssh_username = "ubuntu"
+    aws.instance_type = 'm1.large'
+    aws.ami = 'ami-2efa9d47' # Ubuntu 12.04 LTS 64-bit instance root store
+    aws.ssh_username = 'ubuntu'
 
-    override.ssh.username = "ubuntu"
-    override.ssh.private_key_path = "~/.ssh/id_rsa"
+    override.ssh.username = 'ubuntu'
+    override.ssh.private_key_path = '~/.ssh/id_rsa'
   end
 
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
-    puppet.manifest_file  = "base.pp"
+    puppet.manifest_file  = 'base.pp'
   end
-
 end
