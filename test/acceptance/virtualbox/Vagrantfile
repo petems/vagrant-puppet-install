@@ -56,8 +56,8 @@ Vagrant.configure('2') do |config|
     centos.vm.box = 'puppetlabs/centos-6.6-64-nocm'
 
     centos.vm.provision :puppet do |puppet|
-      puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
-      puppet.manifest_file  = 'base.pp'
+      puppet.environment_path = File.expand_path('../../../support/environments', __FILE__)
+      puppet.environment = "vagrant"
     end
 
     centos.vm.provision 'shell', inline: 'puppet --version'
@@ -69,8 +69,8 @@ Vagrant.configure('2') do |config|
     new_install_url.vm.box = 'puppetlabs/centos-6.6-64-nocm'
 
     new_install_url.vm.provision :puppet do |puppet|
-      puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
-      puppet.manifest_file  = 'base.pp'
+      puppet.environment_path = File.expand_path('../../../support/environments', __FILE__)
+      puppet.environment = "vagrant"
     end
 
     new_install_url.vm.provision 'shell', inline: 'puppet --version'
