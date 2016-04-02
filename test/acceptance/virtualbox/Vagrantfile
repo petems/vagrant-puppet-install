@@ -3,6 +3,7 @@
 
 # plugins don't seem to be auto-loaded from the bundle
 require 'vagrant-puppet-install'
+require 'vagrant-vbguest'
 
 Vagrant.configure('2') do |config|
   config.vm.define :no_config_set do |no_config_set|
