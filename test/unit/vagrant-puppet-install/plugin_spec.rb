@@ -1,7 +1,6 @@
 require_relative '../spec_helper'
 
 describe VagrantPlugins::PuppetInstall::Plugin do
-
   context 'action hooks' do
     let(:hook) { double(append: true, prepend: true) }
     let(:fake_class) { Class.new }
@@ -16,7 +15,7 @@ describe VagrantPlugins::PuppetInstall::Plugin do
   end
 
   it 'should define a config of type :puppet' do
-    default_config = described_class.components.configs[:top].to_hash[:"puppet_install"]
+    default_config = described_class.components.configs[:top].to_hash[:puppet_install]
     expect(default_config).to be(VagrantPlugins::PuppetInstall::Config)
   end
 

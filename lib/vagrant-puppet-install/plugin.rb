@@ -7,7 +7,7 @@ module VagrantPlugins
       via the Puppet Labs package repos.
       DESC
 
-      VAGRANT_VERSION_REQUIREMENT = '>= 1.1.0'
+      VAGRANT_VERSION_REQUIREMENT = '>= 1.1.0'.freeze
 
       # Returns true if the Vagrant version fulfills the requirements
       #
@@ -28,7 +28,7 @@ module VagrantPlugins
             'vagrant-puppet_install.errors.vagrant_version',
             requirement: VAGRANT_VERSION_REQUIREMENT.inspect)
           $stderr.puts msg
-          fail msg
+          raise msg
         end
       end
 

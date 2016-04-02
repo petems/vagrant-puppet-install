@@ -4,96 +4,88 @@
 # plugins don't seem to be auto-loaded from the bundle
 require 'vagrant-puppet-install'
 
-Vagrant.configure("2") do |config|
-
+Vagrant.configure('2') do |config|
   config.vm.define :no_config_set do |no_config_set|
-    no_config_set.vm.box = "ubuntu/trusty64"
-    no_config_set.vm.provision "shell", inline: "echo 'Should still work with no puppet plugin enabled'"
+    no_config_set.vm.box = 'ubuntu/trusty64'
+    no_config_set.vm.provision 'shell', inline: "echo 'Should still work with no puppet plugin enabled'"
   end
 
   config.vm.define :trusty_ubuntu_box do |trusty_ubuntu_box|
     trusty_ubuntu_box.puppet_install.puppet_version = :latest
     trusty_ubuntu_box.puppet_install.install_url = 'https://gist.githubusercontent.com/petems/6723c2eedb9d32d7ad97/raw/990ff448f6430aa015e208668a3cecb3f1db0d4b/purge_old_install_new.sh'
 
-    trusty_ubuntu_box.vm.box = "ubuntu/trusty64"
+    trusty_ubuntu_box.vm.box = 'ubuntu/trusty64'
 
     trusty_ubuntu_box.vm.provision :puppet do |puppet|
       puppet.environment_path = File.expand_path('../../../support/environments', __FILE__)
-      puppet.environment = "vagrant"
+      puppet.environment = 'vagrant'
     end
 
-    trusty_ubuntu_box.vm.provision "shell", inline: "puppet --version"
-
+    trusty_ubuntu_box.vm.provision 'shell', inline: 'puppet --version'
   end
 
   config.vm.define :ubuntu do |ubuntu|
     ubuntu.puppet_install.puppet_version = '3.6.1'
 
-    ubuntu.vm.box = "puppetlabs/ubuntu-12.04-64-nocm"
+    ubuntu.vm.box = 'puppetlabs/ubuntu-12.04-64-nocm'
 
     ubuntu.vm.provision :puppet do |puppet|
       puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
-      puppet.manifest_file  = "base.pp"
+      puppet.manifest_file  = 'base.pp'
     end
 
-    ubuntu.vm.provision "shell", inline: "puppet --version"
-
+    ubuntu.vm.provision 'shell', inline: 'puppet --version'
   end
 
   config.vm.define :gh6 do |gh6|
     gh6.puppet_install.puppet_version = '2.7.23'
 
-    gh6.vm.box = "puppetlabs/ubuntu-12.04-64-nocm"
-    gh6.vm.provision "shell", inline: "puppet --version"
+    gh6.vm.box = 'puppetlabs/ubuntu-12.04-64-nocm'
+    gh6.vm.provision 'shell', inline: 'puppet --version'
 
     gh6.vm.provision :puppet do |puppet|
       puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
-      puppet.manifest_file  = "base.pp"
+      puppet.manifest_file  = 'base.pp'
     end
 
-    gh6.vm.provision "shell", inline: "puppet --version"
-
+    gh6.vm.provision 'shell', inline: 'puppet --version'
   end
 
   config.vm.define :centos do |centos|
     centos.puppet_install.puppet_version = :latest
-    centos.vm.box = "puppetlabs/centos-6.6-64-nocm"
+    centos.vm.box = 'puppetlabs/centos-6.6-64-nocm'
 
     centos.vm.provision :puppet do |puppet|
       puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
-      puppet.manifest_file  = "base.pp"
+      puppet.manifest_file  = 'base.pp'
     end
 
-    centos.vm.provision "shell", inline: "puppet --version"
-
+    centos.vm.provision 'shell', inline: 'puppet --version'
   end
 
   config.vm.define :new_install_url do |new_install_url|
     new_install_url.puppet_install.puppet_version = :latest
     new_install_url.puppet_install.install_url = 'https://raw.githubusercontent.com/hashicorp/puppet-bootstrap/master/centos_6_x.sh'
-    new_install_url.vm.box = "puppetlabs/centos-6.6-64-nocm"
+    new_install_url.vm.box = 'puppetlabs/centos-6.6-64-nocm'
 
     new_install_url.vm.provision :puppet do |puppet|
       puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
-      puppet.manifest_file  = "base.pp"
+      puppet.manifest_file  = 'base.pp'
     end
 
-    new_install_url.vm.provision "shell", inline: "puppet --version"
-
+    new_install_url.vm.provision 'shell', inline: 'puppet --version'
   end
 
   config.vm.define :new_install_path do |new_install_path|
     new_install_path.puppet_install.puppet_version = :latest
     new_install_path.puppet_install.install_url = File.expand_path('../../support/puppet_install_script/shell_install.sh')
-    new_install_path.vm.box = "puppetlabs/centos-6.6-64-nocm"
+    new_install_path.vm.box = 'puppetlabs/centos-6.6-64-nocm'
 
     new_install_path.vm.provision :puppet do |puppet|
       puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
-      puppet.manifest_file  = "base.pp"
+      puppet.manifest_file  = 'base.pp'
     end
 
-    new_install_path.vm.provision "shell", inline: "puppet --version"
-
+    new_install_path.vm.provision 'shell', inline: 'puppet --version'
   end
-
 end

@@ -23,13 +23,13 @@ module VagrantPlugins
         @install_url = nil if @install_url == UNSET_VALUE
       end
 
-      def validate!(machine)
+      def validate!(_machine)
         finalize!
         errors = []
 
         if !puppet_version.nil? && !valid_puppet_version?(puppet_version)
           msg = <<-EOH
-'#{ puppet_version }' is not a valid version of Puppet.
+'#{puppet_version}' is not a valid version of Puppet.
 
 A list of valid versions can be found at: http://docs.puppetlabs.com/release_notes/
           EOH
@@ -38,10 +38,10 @@ A list of valid versions can be found at: http://docs.puppetlabs.com/release_not
 
         if errors.any?
           rendered_errors = Vagrant::Util::TemplateRenderer.render(
-                              'config/validation_failed',
-                              errors: { 'vagrant-puppet-install' => errors }
-                            )
-          fail Vagrant::Errors::ConfigInvalid, errors: rendered_errors
+            'config/validation_failed',
+            errors: { 'vagrant-puppet-install' => errors }
+          )
+          raise Vagrant::Errors::ConfigInvalid, errors: rendered_errors
         end
       end
 
@@ -52,18 +52,18 @@ A list of valid versions can be found at: http://docs.puppetlabs.com/release_not
         available_gems =
           dependency_installer.find_gems_with_sources(puppet_gem_dependency)
         spec, _source =
-        if available_gems.respond_to?(:last)
-          # DependencyInstaller sorts the results such that the last one is
-          # always the one it considers best.
-          spec_with_source = available_gems.last
-          spec_with_source
-        else
-          # Rubygems 2.0 returns a Gem::Available set, which is a
-          # collection of AvailableSet::Tuple structs
-          available_gems.pick_best!
-          best_gem = available_gems.set.first
-          best_gem && [best_gem.spec, best_gem.source]
-        end
+          if available_gems.respond_to?(:last)
+            # DependencyInstaller sorts the results such that the last one is
+            # always the one it considers best.
+            spec_with_source = available_gems.last
+            spec_with_source
+          else
+            # Rubygems 2.0 returns a Gem::Available set, which is a
+            # collection of AvailableSet::Tuple structs
+            available_gems.pick_best!
+            best_gem = available_gems.set.first
+            best_gem && [best_gem.spec, best_gem.source]
+          end
 
         spec && spec.version.to_s
       end
