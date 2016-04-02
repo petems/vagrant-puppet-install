@@ -8,6 +8,7 @@ describe VagrantPlugins::PuppetInstall::Config do
     instance.tap do |o|
       o.puppet_version = puppet_version if defined?(puppet_version)
       o.install_url = install_url if defined?(install_url)
+      o.validate_version = validate_version if defined?(validate_version)
       o.finalize!
     end
   end
@@ -15,6 +16,7 @@ describe VagrantPlugins::PuppetInstall::Config do
   describe 'defaults' do
     its(:puppet_version) { should be_nil }
     its(:install_url) { should be_nil }
+    its(:validate_version) { should be_nil}
   end
 
   describe 'resolving `:latest` to a real Puppet version' do
@@ -70,5 +72,37 @@ describe VagrantPlugins::PuppetInstall::Config do
         expect { subject.validate!(machine) }.to_not raise_error
       end
     end # describe not specified puppet_version validation
+
+    describe 'validate_version set to false should not raise error' do
+      {
+        false => {
+          description: 'Boolean false'
+        },
+        'false' => {
+          description: 'String false'
+        },
+        :false => {
+          description: ':false'
+        },
+      }.each_pair do |falsey, opts|
+        context "#{opts[:description]}" do
+          let(:validate_version) { falsey }
+          let(:puppet_version) { '9.9.9' }
+
+          it 'passes' do
+            expect { subject.validate!(machine) }.to_not raise_error
+          end
+        end
+      end
+    end # describe validate_version set to false should not raise error
+
+    describe 'validate_version set to true with an invalid version should not raise error' do
+      let(:validate_version) { true }
+      let(:puppet_version) { '9.9.9' }
+
+      it 'fails' do
+        expect { subject.validate!(machine) }.to raise_error
+      end
+    end # validate_version set to true with an invalid version should not raise error
   end
 end
