@@ -1,5 +1,25 @@
 # Change Log
 
+## [v4.0.1](https://github.com/petems/vagrant-puppet-install/tree/v4.0.1) (2016-04-04)
+
+[Full Changelog](https://github.com/petems/vagrant-puppet-install/compare/v4.0.0...v4.0.1)
+
+**Closed issues:**
+
+- Machine is force to shutdown and destroyed after puppet is installed [\#42](https://github.com/petems/vagrant-puppet-install/issues/42)
+
+- How to install the latest available version of puppet? [\#41](https://github.com/petems/vagrant-puppet-install/issues/41)
+
+**Merged pull requests:**
+
+- Adds acceptance test for Fedora 23 [\#47](https://github.com/petems/vagrant-puppet-install/pull/47) ([petems](https://github.com/petems))
+
+- Fixes Vagrant on Puppet \> 4 for acceptance [\#45](https://github.com/petems/vagrant-puppet-install/pull/45) ([petems](https://github.com/petems))
+
+- Rubocop fixes [\#44](https://github.com/petems/vagrant-puppet-install/pull/44) ([petems](https://github.com/petems))
+
+- Fixes unlink code to work on Windows machines [\#43](https://github.com/petems/vagrant-puppet-install/pull/43) ([petems](https://github.com/petems))
+
 ## [v4.0.0](https://github.com/petems/vagrant-puppet-install/tree/v4.0.0) (2016-01-25)
 
 [Full Changelog](https://github.com/petems/vagrant-puppet-install/compare/v3.1.0...v4.0.0)
