@@ -73,6 +73,21 @@ Vagrant.configure('2') do |config|
     debian_jessie_372.vm.provision 'shell', inline: 'puppet --version'
   end
 
+  config.vm.define :validate_version_false do |validate_version_false|
+    validate_version_false.puppet_install.puppet_version = '9.9.9'
+    validate_version_false.puppet_install.validate_version = false
+
+    validate_version_false.puppet_install.install_url = File.expand_path('../../support/puppet_install_script/shell_install.sh')
+    validate_version_false.vm.box = "puppetlabs/centos-6.6-64-nocm"
+
+    validate_version_false.vm.provision :puppet do |puppet|
+      puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
+      puppet.manifest_file  = "base.pp"
+    end
+
+    validate_version_false.vm.provision "shell", inline: "puppet --version"
+  end
+
   config.vm.define :trusty_ubuntu_box do |trusty_ubuntu_box|
     trusty_ubuntu_box.puppet_install.puppet_version = :latest
     trusty_ubuntu_box.puppet_install.install_url = 'https://gist.githubusercontent.com/petems/6723c2eedb9d32d7ad97/raw/990ff448f6430aa015e208668a3cecb3f1db0d4b/purge_old_install_new.sh'

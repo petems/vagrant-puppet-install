@@ -5,11 +5,12 @@ require 'vagrant'
 module VagrantPlugins
   module PuppetInstall
     class Config < Vagrant.plugin('2', :config)
-      attr_accessor :puppet_version, :install_url
+      attr_accessor :puppet_version, :install_url, :validate_version
 
       def initialize
         @puppet_version = UNSET_VALUE
         @install_url = UNSET_VALUE
+        @validate_version = UNSET_VALUE
         @logger = Log4r::Logger.new('vagrantplugins::puppet_install::config')
       end
 
@@ -20,6 +21,7 @@ module VagrantPlugins
           # resolve `latest` to a real version
           @puppet_version = retrieve_latest_puppet_version
         end
+        @validate_version = nil if @validate_version == UNSET_VALUE
         @install_url = nil if @install_url == UNSET_VALUE
       end
 
@@ -27,13 +29,17 @@ module VagrantPlugins
         finalize!
         errors = []
 
-        if !puppet_version.nil? && !valid_puppet_version?(puppet_version)
-          msg = <<-EOH
-'#{puppet_version}' is not a valid version of Puppet.
+        if falsey?(validate_version)
+          @logger.debug("Not validating version due to validate_version being false")
+        else
+          if !puppet_version.nil? && !valid_puppet_version?(puppet_version)
+            msg = <<-EOH
+            '#{ puppet_version }' is not a valid version of Puppet.
 
-A list of valid versions can be found at: http://docs.puppetlabs.com/release_notes/
-          EOH
-          errors << msg
+            A list of valid versions can be found at: http://docs.puppetlabs.com/release_notes/
+            EOH
+            errors << msg
+          end
         end
 
         if errors.any?
@@ -89,6 +95,10 @@ A list of valid versions can be found at: http://docs.puppetlabs.com/release_not
 
       def puppet_gem_dependency(version = nil)
         Gem::Dependency.new('puppet', version)
+      end
+
+      def falsey?(falsey_value)
+        true if [false,:false,'false'].include?(falsey_value)
       end
     end
   end

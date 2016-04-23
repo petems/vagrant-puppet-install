@@ -45,6 +45,20 @@ should be a valid Puppet release (ie. `2.7.11`, `3.7.4`, etc.).
 
 The Puppet version is validated against the RubyGems API. So as long as the version you give is [listed there](https://rubygems.org/gems/puppet/versions/), it will allow you to install.
 
+You may wish to disable this validation. This could be useful if you've got limited bandwidth on a bad internet connection or you're on a proxy, or your specifying a version that won't match against the RubyGems API (such as a custom patched version of Puppet).
+
+If you wish to disable this validation you can disable it like so:
+
+```ruby
+Vagrant.configure("2") do |config|
+
+  config.puppet_install.validate_version = false
+
+  ...
+
+end
+```
+
 Install the latest version of Puppet:
 
 ```ruby
