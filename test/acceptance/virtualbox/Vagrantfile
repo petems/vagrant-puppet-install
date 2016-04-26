@@ -51,7 +51,7 @@ Vagrant.configure('2') do |config|
 
   config.vm.define :fedora_384 do |fedora_384|
     fedora_384.vm.box = "fedora/23-cloud-base"
-    fedora_384.puppet_install.puppet_version = '3.8.4'
+    fedora_384.puppet_install.puppet_version = '3.8.1'
 
     fedora_384.vm.provision :puppet do |puppet|
       puppet.environment_path = File.expand_path('../../../support/environments', __FILE__)
