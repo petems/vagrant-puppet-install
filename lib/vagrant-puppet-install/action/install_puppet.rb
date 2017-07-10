@@ -63,7 +63,9 @@ module VagrantPlugins
           elsif windows_guest?
             # No Windows Version yet
           else
-            if @machine.config.puppet_install.puppet_version == 'latest' || @machine.config.puppet_install.puppet_version.match(/^4\..+/)
+            if @machine.config.puppet_install.puppet_version == 'latest' || @machine.config.puppet_install.puppet_version.match(/^5\..+/)
+              'https://raw.githubusercontent.com/petems/puppet-install-shell/master/install_puppet_5_agent.sh'
+            elsif @machine.config.puppet_install.puppet_version.match(/^4\..+/)
               'https://raw.githubusercontent.com/petems/puppet-install-shell/master/install_puppet_agent.sh'
             else
               'https://raw.githubusercontent.com/petems/puppet-install-shell/master/install_puppet.sh'
