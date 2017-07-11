@@ -6,6 +6,18 @@ require 'yard'
 
 YARD::Rake::YardocTask.new
 
+begin
+  require 'github_changelog_generator/task'
+  require 'vagrant-puppet-install/version'
+  GitHubChangelogGenerator::RakeTask.new :changelog do |config|
+    version = VagrantPlugins::PuppetInstall::VERSION
+    config.future_release = "v#{version}"
+    config.header = "# Change Log\n\nAll notable changes to this project will be documented in this file.\n"
+    config.exclude_labels = %w{duplicate question invalid wontfix modulesync}
+  end
+rescue LoadError
+end
+
 namespace :test do
   RSpec::Core::RakeTask.new(:unit) do |t|
     t.pattern = 'test/unit/**/*_spec.rb'
