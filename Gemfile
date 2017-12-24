@@ -17,7 +17,8 @@ group :acceptance do
 end
 
 group :docs do
-  gem 'yard', '~> 0.8.5'
+  gem 'yard', '~> 0.9.11'
   gem 'redcarpet', '~> 2.2.2'
   gem 'github-markup', '~> 0.7.5'
+  gem 'rubocop', '~> 0.49.0'
 end
