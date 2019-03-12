@@ -7,9 +7,6 @@
 
 [gem]: https://rubygems.org/gems/vagrant-puppet-install
 [travis]: http://travis-ci.org/petems/vagrant-puppet-install
-[gemnasium]: https://gemnasium.com/petems/vagrant-puppet-install
-[codeclimate]: https://codeclimate.com/github/petems/vagrant-puppet-install
-
 
 A Vagrant plugin that ensures the desired version of Puppet is installed via the
 Puppet Labs package repo. This proves very useful when using Vagrant
