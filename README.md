@@ -2,8 +2,6 @@
 
 [![Gem Version](http://img.shields.io/gem/v/vagrant-puppet-install.svg)][gem]
 [![Build Status](http://img.shields.io/travis/petems/vagrant-puppet-install.svg)][travis]
-[![Dependency Status](http://img.shields.io/gemnasium/petems/vagrant-puppet-install.svg)][gemnasium]
-[![Code Climate](http://img.shields.io/codeclimate/github/petems/vagrant-puppet-install.svg)][codeclimate]
 
 [gem]: https://rubygems.org/gems/vagrant-puppet-install
 [travis]: http://travis-ci.org/petems/vagrant-puppet-install
