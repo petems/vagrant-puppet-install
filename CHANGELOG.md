@@ -1,7 +1,19 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
+## [v6.0.0](https://github.com/petems/vagrant-puppet-install/tree/v6.0.0) (2019-04-07)
+[Full Changelog](https://github.com/petems/vagrant-puppet-install/compare/v5.0.0...v6.0.0)
 
+**Closed issues:**
+
+- '4.9.10' is not a valid version of Puppet [\#56](https://github.com/petems/vagrant-puppet-install/issues/56)
+- Incorrect install script used for default\_install\_url when version is latest [\#55](https://github.com/petems/vagrant-puppet-install/issues/55)
+
+**Merged pull requests:**
+
+- Add support for Puppet 6 [\#61](https://github.com/petems/vagrant-puppet-install/pull/61) ([dhoppe](https://github.com/dhoppe))
+- Bump version to 5.0.1 [\#59](https://github.com/petems/vagrant-puppet-install/pull/59) ([petems](https://github.com/petems))
+- Fixes Travis config [\#58](https://github.com/petems/vagrant-puppet-install/pull/58) ([petems](https://github.com/petems))
+- Fixes security issues detected by Github [\#57](https://github.com/petems/vagrant-puppet-install/pull/57) ([petems](https://github.com/petems))
 
 ## [v5.0.0](https://github.com/petems/vagrant-puppet-install/tree/v5.0.0) (2017-07-11)
 [Full Changelog](https://github.com/petems/vagrant-puppet-install/compare/v4.1.0...v5.0.0)
