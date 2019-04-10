@@ -18,6 +18,13 @@ begin
 rescue LoadError
 end
 
+desc 'Validate ruby files'
+task :validate do
+  Dir['test/**/*.rb', 'lib/**/*.rb'].each do |ruby_file|
+    sh "ruby -c #{ruby_file}" unless ruby_file =~ %r{spec/fixtures}
+  end
+end
+
 namespace :test do
   RSpec::Core::RakeTask.new(:unit) do |t|
     t.pattern = 'test/unit/**/*_spec.rb'
