@@ -28,7 +28,7 @@ GIT
 PATH
   remote: .
   specs:
-    vagrant-puppet-install (6.0.0)
+    vagrant-puppet-install (6.0.1)
 
 GEM
   remote: https://rubygems.org/
