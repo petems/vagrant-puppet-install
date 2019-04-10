@@ -1,6 +1,11 @@
+sudo: required
 rvm:
-  - 2.2.5
-bundler_args: --jobs 7 --without=acceptance
+  - 2.4.1
+before_install:
+  - gem install bundler
+  - bundle install
+  - docker pull petems/centos-7-docker-vagrant-insecure-key
 script:
   - bundle exec rake validate
   - bundle exec rake test:unit
+  - bundle exec rake test:docker_acceptance

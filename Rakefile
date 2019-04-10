@@ -65,6 +65,19 @@ namespace :test do
       end
     end
   end
+
+  desc 'Run docker acceptance test - Used in CI'
+  task :docker_acceptance do |_t, args|
+    puts '=================================================================='
+    puts "Running acceptance tests against Docker provider..."
+    puts '=================================================================='
+
+    Dir.chdir("test/acceptance/docker") do
+      system('vagrant destroy -f')
+      system("vagrant up --provider=docker --provision")
+      system('vagrant destroy -f')
+    end
+  end
 end
 
 task default: 'test:unit'

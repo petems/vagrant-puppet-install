@@ -1,0 +1,22 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# plugins don't seem to be auto-loaded from the bundle
+require 'vagrant-puppet-install'
+
+Vagrant.configure('2') do |config|
+  config.puppet_install.puppet_version = :latest
+
+  config.vm.provider "docker" do |d|
+    d.image   = "petems/centos-7-docker-vagrant-insecure-key"
+    d.name    = "vagrant-puppet-install-centos-7"
+    d.has_ssh = true
+  end
+
+  config.ssh.username = "vagrant"
+
+  config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = File.expand_path('../../../support/manifests', __FILE__)
+    puppet.manifest_file  = 'base.pp'
+  end
+end
