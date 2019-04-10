@@ -1,5 +1,22 @@
 # Change Log
 
+All notable changes to this project will be documented in this file.
+
+
+## [v6.0.1](https://github.com/petems/vagrant-puppet-install/tree/v6.0.1) (2019-04-10)
+[Full Changelog](https://github.com/petems/vagrant-puppet-install/compare/v6.0.1...v6.0.1)
+
+**Fixed bugs:**
+
+- Syntax error since Puppet 6 support added [\#64](https://github.com/petems/vagrant-puppet-install/issues/64)
+
+## [v6.0.1](https://github.com/petems/vagrant-puppet-install/tree/v6.0.1) (2019-04-10)
+[Full Changelog](https://github.com/petems/vagrant-puppet-install/compare/v6.0.0...v6.0.1)
+
+**Closed issues:**
+
+- Issues with Ubuntu 17.10? [\#60](https://github.com/petems/vagrant-puppet-install/issues/60)
+
 ## [v6.0.0](https://github.com/petems/vagrant-puppet-install/tree/v6.0.0) (2019-04-07)
 [Full Changelog](https://github.com/petems/vagrant-puppet-install/compare/v5.0.0...v6.0.0)
 
