@@ -133,7 +133,7 @@ GEM
     rack (2.2.2)
     rainbow (2.2.2)
       rake
-    rake (10.1.1)
+    rake (13.0.1)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
@@ -219,7 +219,7 @@ DEPENDENCIES
   github-markup (~> 0.7.5)
   github_changelog_generator (~> 1.13.1)
   pry (~> 0.11.3)
-  rake (~> 10.1.1)
+  rake (~> 13.0.1)
   redcarpet (~> 2.2.2)
   rspec (~> 3)
   rspec-its (~> 1.3)
