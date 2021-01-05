@@ -101,7 +101,7 @@ describe VagrantPlugins::PuppetInstall::Config do
       let(:puppet_version) { '9.9.9' }
 
       it 'fails' do
-        expect { subject.validate!(machine) }.to raise_error
+        expect { subject.validate!(machine) }.to raise_error(Vagrant::Errors::ConfigInvalid)
       end
     end # validate_version set to true with an invalid version should not raise error
   end
