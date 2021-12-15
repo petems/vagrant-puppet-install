@@ -3,6 +3,7 @@ $LOAD_PATH.unshift File.expand_path('../../../lib', __FILE__)
 require 'rspec/its'
 require 'rspec/core'
 require 'vagrant-puppet-install'
+require 'datadog/ci'
 
 RSpec.configure do |config|
   config.formatter = :documentation
@@ -22,4 +23,10 @@ RSpec.configure do |config|
   # specify metadata with symobls only (ie no '=> true' required)
   config.filter_run focus: true
   config.run_all_when_everything_filtered = true
+end
+
+Datadog.configure do |c|
+  c.ci_mode.enabled = true
+  c.service = 'vagrant-puppet-install'
+  c.use :rspec
 end
