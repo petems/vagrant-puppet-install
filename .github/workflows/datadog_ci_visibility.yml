@@ -1,0 +1,26 @@
+name: "Datadog CI Visibility"
+on: [push, pull_request]
+jobs:
+  datadog_ci_visibility:
+    runs-on: ubuntu-latest
+    services:
+      datadog-agent:
+        image: gcr.io/datadoghq/agent:latest
+        ports:
+          - 8126:8126
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
+          DD_INSIDE_CI: "true"
+          DD_HOSTNAME: "none"
+    steps:
+      - name: Install vault
+        run: |
+          curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+          sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+          sudo apt-get update && sudo apt-get install vault
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "2.7"
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - run: bundle exec rake test:unit
