@@ -26,4 +26,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'github_changelog_generator', '~> 1.13.1'
   spec.add_development_dependency 'yard'
   spec.add_development_dependency 'ddtrace', ">=0.51.0"
+  spec.add_development_dependency 'rubygems-tasks'
 end

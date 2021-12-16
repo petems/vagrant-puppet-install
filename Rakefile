@@ -1,10 +1,12 @@
 require 'bundler/setup'
-require 'bundler/gem_tasks'
+require 'rubygems/tasks'
 require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
 require 'yard'
 
 YARD::Rake::YardocTask.new
+
+Gem::Tasks.new
 
 begin
   require 'github_changelog_generator/task'
