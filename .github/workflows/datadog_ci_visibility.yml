@@ -1,5 +1,9 @@
 name: "Datadog CI Visibility"
-on: [push, pull_request]
+on:
+  pull_request:
+  push:
+  schedule:
+    - cron:  '30 5,17 * * *'
 jobs:
   datadog_ci_visibility:
     runs-on: ubuntu-latest
